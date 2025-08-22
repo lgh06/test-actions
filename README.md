@@ -1,4 +1,4 @@
-# test-actions  
+# github-actions  
 ## action 1
 Create a issue, submit.  
 Then comment this issue, with `"url1" "url2" "url3"` or `url1`  
