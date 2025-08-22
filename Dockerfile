@@ -1,2 +1,2 @@
 FROM scratch
-COPY dist/ . 
+COPY dist/ ./dist 
