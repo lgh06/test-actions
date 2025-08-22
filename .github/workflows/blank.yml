@@ -3,22 +3,14 @@ name: CI
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   issue_comment:
-    types: [created]
-  # pull_request:
-  #   branches: [ "main" ]
-
-  # # Allows you to run this workflow manually from the Actions tab
-  # workflow_dispatch:
-
+    types: [created, edited]
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -35,18 +27,11 @@ jobs:
           echo test, and deploy your project.
           sudo apt-get update
           sudo apt-get install -y aria2
-          aria2c -x 5 -Z ${{ github.event.comment.body }} -d ./dist/
-      # - uses: suisei-cn/actions-download-file@818d6b7dc8fe73f2f924b6241f2b1134ca1377d9 # 1.6.0
-        # id: downloadfile  # Remember to give an ID if you need the output
-        # name: Download the file
-        # with:
-          # url: ${{ github.event.comment.body }}
-          # target: dist/
-          # auto-match: true
+          aria2c -x 5 -Z ${{ github.event.comment.body }} -d ./dist
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: dist-without-markdown
+          name: dist-without-php
           path: |
             dist
-            !dist/**/*.md
+            !dist/**/*.php
