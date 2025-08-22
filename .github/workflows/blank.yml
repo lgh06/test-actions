@@ -33,13 +33,16 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
-      - uses: suisei-cn/actions-download-file@818d6b7dc8fe73f2f924b6241f2b1134ca1377d9 # 1.6.0
-        id: downloadfile  # Remember to give an ID if you need the output
-        name: Download the file
-        with:
-          url: ${{ github.event.comment.body }}
-          target: dist/
-          auto-match: true
+          sudo apt-get update
+          sudo apt-get install -y aria2
+          aria2c -x 5 ${{ github.event.comment.body }} -d ./dist/
+      # - uses: suisei-cn/actions-download-file@818d6b7dc8fe73f2f924b6241f2b1134ca1377d9 # 1.6.0
+        # id: downloadfile  # Remember to give an ID if you need the output
+        # name: Download the file
+        # with:
+          # url: ${{ github.event.comment.body }}
+          # target: dist/
+          # auto-match: true
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
