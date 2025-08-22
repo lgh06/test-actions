@@ -1,2 +1,2 @@
 https://github.com/obsidianmd/obsidian-releases/releases/download/v1.9.10/Obsidian-1.9.10.dmg
-https://github.com/obsidianmd/obsidian-releases/releases/download/v1.9.10/Obsidian-1.9.10.apk
+https://www.zotero.org/download/client/dl?channel=release&platform=mac
