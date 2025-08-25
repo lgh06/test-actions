@@ -31,7 +31,7 @@ jobs:
           # Check if magnet link is provided
           if [[ ${{ github.event.comment.body }} == *magnet* ]]; then
               # 实时获取最新的tracker列表
-              trackers=$(curl -s "https://cf.trackerslist.com/best_aria2.txt" || echo "")
+              trackers=$(curl -s "https://cf.trackerslist.com/all_aria2.txt" || echo "")
               if [[ -n "$trackers" ]]; then
                   echo "使用实时获取的tracker列表"
                   aria2c -d ./dist --bt-tracker="$trackers" ${{ github.event.comment.body }}
