@@ -28,7 +28,20 @@ jobs:
           echo test, and deploy your project.
           sudo apt-get update
           sudo apt-get install -y aria2
-          aria2c -x 5 -s 5 -Z ${{ github.event.comment.body }} -d ./dist
+          # Check if magnet link is provided
+          if [[ $@ == *magnet* ]]; then
+              # 实时获取最新的tracker列表
+              trackers=$(curl -s "https://cf.trackerslist.com/best_aria2.txt" || echo "")
+              if [[ -n "$trackers" ]]; then
+                  echo "使用实时获取的tracker列表"
+                  aria2c --bt-tracker="$trackers" $@
+              else
+                  echo "无法获取tracker列表，使用默认设置"
+                  aria2c $@
+              fi
+          else
+              aria2c -x 5 -s 5 -Z ${{ github.event.comment.body }} -d ./dist
+          fi
       - name: Archive production artifacts
         uses: actions/upload-artifact@v4
         with:
