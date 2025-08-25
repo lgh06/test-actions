@@ -49,4 +49,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           context: .
           push: true
+          provenance: false
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
