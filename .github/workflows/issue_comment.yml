@@ -29,7 +29,7 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y aria2
           # Check if magnet link is provided
-          if [[ "$@" == *"magnet"* ]]; then
+          if [[ ${{ github.event.comment.body }} == *magnet* ]]; then
               # 实时获取最新的tracker列表
               trackers=$(curl -s "https://cf.trackerslist.com/best_aria2.txt" || echo "")
               if [[ -n "$trackers" ]]; then
