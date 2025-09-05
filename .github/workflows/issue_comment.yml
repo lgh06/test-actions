@@ -27,7 +27,7 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           sudo apt-get update
-          sudo apt-get install -y aria2
+          sudo apt-get install -y aria2 ffmpeg
           # Check if magnet link is provided
           if [[ ${{ github.event.comment.body }} == *magnet* ]]; then
               # 实时获取最新的tracker列表
@@ -39,6 +39,10 @@ jobs:
                   echo "无法获取tracker列表，使用默认设置"
                   aria2c -d ./dist ${{ github.event.comment.body }}
               fi
+          elif [[ ${{ github.event.comment.body }} == *youtube* ]]; then
+            curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ./yt-dlp
+            chmod a+rx ./yt-dlp
+            ./yt-dlp -f "bv*[height<=1080]+ba/b[height<=1080]" --recode-video mp4 -o "./dist/%(upload_date>%Y-%m-%d)s.%(ext)s" ${{ github.event.comment.body }}
           else
               echo "aria2c -x 5 -s 5 -Z ${{ github.event.comment.body }} -d ./dist"
               aria2c -x 5 -s 5 -Z ${{ github.event.comment.body }} -d ./dist
