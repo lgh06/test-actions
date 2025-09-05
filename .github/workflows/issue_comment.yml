@@ -27,7 +27,7 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           sudo apt-get update
-          sudo apt-get install -y aria2 ffmpeg
+          sudo apt-get install -y aria2 ffmpeg curl
           # Check if magnet link is provided
           if [[ ${{ github.event.comment.body }} == *magnet* ]]; then
               # 实时获取最新的tracker列表
