@@ -30,14 +30,15 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           sudo apt-get update
-          sudo apt-get install -y aria2 ffmpeg curl
           if grep -q "youtube" urls.txt; then
             echo "Found youtube link(s) in urls.txt, using yt-dlp."
+            sudo apt-get install -y ffmpeg curl
             curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ./yt-dlp
             chmod a+rx ./yt-dlp
             ./yt-dlp -a urls.txt --cookies coo.txt -f "bv*[height<=1080]+ba/b[height<=1080]" --recode-video mp4 -o "./dist/%(upload_date>%Y-%m-%d)s.%(ext)s"
           else
             echo "No youtube links in urls.txt, using aria2c."
+            sudo apt-get install -y aria2
             aria2c -x 5 -s 5 -i urls.txt -d ./dist
           fi
       # Uses the `docker/login-action` action to log in to the Container registry registry using the account and password that will publish the packages. Once published, the packages are scoped to the account defined here.
