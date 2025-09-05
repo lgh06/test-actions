@@ -12,3 +12,4 @@ then you can get files in `docker pull ghcr.io/lgh06/test-actions:latest`
 > https://cnb.cool/znb/hubproxy  
 > https://github.com/sky22333/hubproxy  
 > https://cnb.cool/ace/docker  
+> https://chrome.google.com/webstore/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc  
