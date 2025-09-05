@@ -42,7 +42,7 @@ jobs:
           elif [[ ${{ github.event.comment.body }} == *youtube* ]]; then
             curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ./yt-dlp
             chmod a+rx ./yt-dlp
-            ./yt-dlp -f "bv*[height<=1080]+ba/b[height<=1080]" --recode-video mp4 -o "./dist/%(upload_date>%Y-%m-%d)s.%(ext)s" ${{ github.event.comment.body }}
+            ./yt-dlp --cookies coo.txt -f "bv*[height<=1080]+ba/b[height<=1080]" --recode-video mp4 -o "./dist/%(upload_date>%Y-%m-%d)s.%(ext)s" ${{ github.event.comment.body }}
           else
               echo "aria2c -x 5 -s 5 -Z ${{ github.event.comment.body }} -d ./dist"
               aria2c -x 5 -s 5 -Z ${{ github.event.comment.body }} -d ./dist

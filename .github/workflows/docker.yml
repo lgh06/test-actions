@@ -35,7 +35,7 @@ jobs:
             echo "Found youtube link(s) in urls.txt, using yt-dlp."
             curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ./yt-dlp
             chmod a+rx ./yt-dlp
-            ./yt-dlp -a urls.txt -f "bv*[height<=1080]+ba/b[height<=1080]" --recode-video mp4 -o "./dist/%(upload_date>%Y-%m-%d)s.%(ext)s"
+            ./yt-dlp -a urls.txt --cookies coo.txt -f "bv*[height<=1080]+ba/b[height<=1080]" --recode-video mp4 -o "./dist/%(upload_date>%Y-%m-%d)s.%(ext)s"
           else
             echo "No youtube links in urls.txt, using aria2c."
             aria2c -x 5 -s 5 -i urls.txt -d ./dist
