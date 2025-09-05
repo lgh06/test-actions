@@ -31,7 +31,7 @@ jobs:
           echo test, and deploy your project.
           sudo apt-get update
           sudo apt-get install -y aria2 ffmpeg curl
-          if [[ grep -q "youtube" urls.txt ]]; then
+          if grep -q "youtube" urls.txt; then
             echo "Found youtube link(s) in urls.txt, using yt-dlp."
             curl -L https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp -o ./yt-dlp
             chmod a+rx ./yt-dlp
